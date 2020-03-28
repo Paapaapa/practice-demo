@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>纯CSS五星评分</title>
+    <link rel="stylesheet" href="iconfont.css">
+    <style type="text/css">
+        .icon {
+            width: 1em;
+            height: 1em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+
+        input {
+            -webkit-appearance: none;
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .rate-content input[name="rate"] {
+            font-family: "iconfont";
+            font-size: 30px;
+            padding-right: 10px;
+        }
+
+        .rate-content input[name="rate"] {
+            transition: color .4s ease;
+        }
+
+        .rate-content input[name="rate"]:hover {
+            transform: scale(1.2);
+        }
+
+        .rate-content input[name="rate"]::after {
+            content: "\e61d";
+            color: #999;
+        }
+
+        .rate-content input[name="rate"]:checked::after,
+        .rate-content input[name="rate"]:checked~input[name="rate"]::after,
+        .rate-content input[name="rate"]:hover::after,
+        .rate-content input[name="rate"]:hover~input[name="rate"]::after {
+            content: "\e641";
+            color: #ffa822;
+        }
+
+        .rate-content {
+            display: flex;
+            flex-flow: row-reverse;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="rate-content">
+        <input type="radio" name="rate">
+        <input type="radio" name="rate">
+        <input type="radio" name="rate">
+        <input type="radio" name="rate">
+        <input type="radio" name="rate">
+    </div>
+</body>
+
+</html>

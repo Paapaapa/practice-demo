@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>100以内计算</title>
+</head>
+
+<body>
+    <form>
+        <div>
+            <label for="arithmetic-num">请输入算术元数：</label>
+            <input type="number" id="arithmetic-num">
+        </div>
+        <div>
+            <label for="exercise-num">请输入题目数量：</label>
+            <input type="number" id="exercise-num">
+        </div>
+        <input type="button" value="生成" onclick="onSubmit()">
+        <input type="button" value="检查" onclick="onCheck()" id="check-btn" style="display:none;">
+        <input type="button" value="纠错" onclick="onRight()" id="detect-btn" style="display:none;">
+    </form>
+    <div id="display-area" style="padding:10px">
+        提示：请先输入算术元数和题目数量,算术元数必须大于1
+    </div>
+    <script>
+        // 操作符常量
+        const operator = ['+', '-'];
+        // 正确结果
+        let result = [];
+
+        // 生成算式
+        function onSubmit() {
+            let arithmeticNumElement = document.querySelector('#arithmetic-num');
+            let exerciseNumElement = document.querySelector('#exercise-num');
+            let displayAreaElement = document.querySelector('#display-area');
+            // 算术元数
+            let arithmeticNum = Number(arithmeticNumElement.value);
+            // 题目数量
+            let exerciseNum = Number(exerciseNumElement.value);
+            // 清空结果
+            result = [];
+            if (exerciseNum > 0 && arithmeticNum > 1) {
+                // 输出htmlArr
+                let displayHTMLArr = [];
+                for (let i = 0; i < exerciseNum; i++) {
+                    let calArr = [];
+                    let displayItemHTML = `<p>第${i+1}题 `;
+                    for (let j = 0; j < arithmeticNum; j++) {
+                        // 取0或1，表示取+或-
+                        let opt = Math.round(Math.random());
+                        // 四舍五入均匀取范围为[0,100]的整数
+                        let temp = Math.round(Math.random() * 100);
+                        let number = j === 0 ? `${temp}` : `${operator[opt]}${temp}`;
+                        calArr.push(number);
+                        displayItemHTML += number;
+                    }
+                    displayItemHTML += ' = <input type="number"></p>';
+                    displayHTMLArr.push(displayItemHTML);
+                    // 计算各算式结果
+                    result.push(calArr.reduce((sum, val) => sum + Number(val), 0));
+                }
+                displayAreaElement.innerHTML = `<form id="count-form">${displayHTMLArr.join('')}</form>`;
+                document.querySelector('#detect-btn').style.display = "none";
+                document.querySelector('#check-btn').style.display = "inline-block";
+            } else {
+                displayAreaElement.innerHTML = "提示：请先输入算术元数和题目数量,算术元数必须大于1";
+            }
+        }
+
+        function onCheck() {
+            let formElement = Array.from(document.querySelectorAll('#count-form > p > input'));
+            formElement.forEach((ele, index) => {
+                let spanElement = ele.nextSibling || document.createElement('span');
+                if (Number(ele.value) === result[index]) {
+                    spanElement.innerText = " 回答正确";
+                    spanElement.style = "color:green;";
+                } else {
+                    spanElement.innerText = " 回答错误";
+                    spanElement.style = "color:red;";
+                }
+                ele.nextSibling || ele.parentNode.append(spanElement);
+            });
+            document.querySelector('#detect-btn').style.display = "inline-block";
+        }
+
+        function onRight() {
+            let formElement = Array.from(document.querySelectorAll('#count-form > p > input'));
+            formElement.forEach((ele, index) => {
+                let spanElement = ele.nextSibling.nextSibling || document.createElement('span');
+                spanElement.innerText = ` 正确答案为:${result[index]}`;
+                ele.nextSibling.nextSibling || ele.parentNode.append(spanElement);
+            });
+        }
+    </script>
+</body>
+
+</html>
