@@ -5,7 +5,7 @@ var tools = (function () {
   }
 
   function digitalize(str) {
-    return Number(str.replace(/\s/g, ''));
+    return Number(str.replace(/\s/g, '')) || 0;
   }
 
   return {
