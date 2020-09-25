@@ -1,4 +1,4 @@
-<button type="button" data-method="plus">+</button>
-<button type="button" data-method="minus">-</button>
-<button type="button" data-method="multiply">*</button>
-<button type="button" data-method="divide">/</button>
+<button type="button" data-method="plus" class='btn'>+</button>
+<button type="button" data-method="minus" class='btn'>-</button>
+<button type="button" data-method="multiply" class='btn'>*</button>
+<button type="button" data-method="divide" class='btn'>/</button>

@@ -4,5 +4,10 @@ export function getElement(ev) {
 }
 
 export function digitalize(str) {
-  return Number(str.replace(/\s/g, '')) || 0;
+  return Number(str) || 0;
+}
+
+
+export function trimSpace(str = '') {
+  return str.replace(/\s/g, '');
 }
