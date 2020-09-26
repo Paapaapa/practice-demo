@@ -2,14 +2,19 @@
   function Tab(el, options) {
     this.el = el;
     this.options = options;
-  }
 
-  Tab.prototype.init = function () {
-    this.current = 0;
+    this.nav = doc.createElement('div');
+    this.content = doc.createElement('div');
+
     this.navItemTpl = doc.getElementById('nav-item-tpl').innerHTML;
     this.contentTpl = doc.getElementById('content-tpl').innerHTML;
     this.data = JSON.parse(doc.getElementById('data').innerHTML);
 
+    this.current = 0;
+    this.htmlCache = {};
+  }
+
+  Tab.prototype.init = function () {
     this.render();
     this.bindEvent();
   };
@@ -17,16 +22,14 @@
   Tab.prototype.render = function () {
     var oFrag = doc.createDocumentFragment();
 
-    var nav = doc.createElement('div');
-    nav.className = 'nav';
-    nav.innerHTML = this.renderNavItems(this.data);
+    this.nav.className = 'nav';
+    this.nav.innerHTML = this.renderNavItems(this.data);
 
-    var content = doc.createElement('div');
-    content.className = 'content';
-    content.innerHTML = this.renderContent(this.data[0]);
+    this.content.className = 'content';
+    this.content.innerHTML = this.renderContent(this.data[0], 0);
 
-    oFrag.appendChild(nav);
-    oFrag.appendChild(content);
+    oFrag.appendChild(this.nav);
+    oFrag.appendChild(this.content);
 
     this.el.appendChild(oFrag);
   };
@@ -45,20 +48,22 @@
     return html;
   };
 
-  Tab.prototype.renderContent = function (data) {
-    return this.contentTpl.replace(/{{(.*?)}}/g, function (_, key) {
-      return {
-        name: data.name,
-        content: data.content,
-        className: 'content-item',
-      }[key];
-    });
+  Tab.prototype.renderContent = function (data, index) {
+    if (!this.htmlCache[index]) {
+      this.htmlCache[index] = this.contentTpl.replace(/{{(.*?)}}/g, function (_, key) {
+        return {
+          name: data.name,
+          content: data.content,
+          className: 'content-item',
+        }[key];
+      });
+    }
+
+    return this.htmlCache[index];
   };
 
   Tab.prototype.bindEvent = function () {
-    var navElement = this.el.getElementsByClassName('nav')[0];
-
-    navElement.addEventListener('click', this.onNavClick.bind(this), false);
+    this.nav.addEventListener('click', this.onNavClick.bind(this), false);
   };
 
   Tab.prototype.onNavClick = function (ev) {
@@ -72,7 +77,7 @@
       this.current = index;
       navItemElements[index].className = 'nav-item current';
 
-      el.getElementsByClassName('content')[0].innerHTML = this.renderContent(this.data[index]);
+      this.content.innerHTML = this.renderContent(this.data[index], index);
     }
   };
 
