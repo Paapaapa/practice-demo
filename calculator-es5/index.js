@@ -1,4 +1,4 @@
-(function (doc) {
+;(function (doc) {
   var resultElement = doc.getElementsByClassName('result')[0],
     buttonGroupElement = doc.getElementsByClassName('button-group')[0];
 

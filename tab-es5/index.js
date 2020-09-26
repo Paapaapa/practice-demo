@@ -1,4 +1,4 @@
-(function (doc) {
+;(function (doc) {
   function Tab(el, options) {
     this.el = el;
     this.options = options;
