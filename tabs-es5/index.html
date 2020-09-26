@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ES5程序设计——tabs</title>
+  <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+  <div class='container'>
+
+  </div>
+
+  <script type='text/html' id='nav-item-tpl'>
+    <div class='{{className}}'>{{name}}</div>
+  </script>
+
+  <script type='text/html' id='content-tpl'>
+    <div class='{{className}}'>
+      <h1>{{name}}</h1>
+      <p>{{content}}</p>
+    </div>
+  </script>
+
+  <script type='application/json' id='data'>
+    [{
+        "name": "南京",
+        "content": "南京是江苏的省汇。"
+      },
+      {
+        "name": "北京",
+        "content": "北京是中国的首都。"
+      },
+      {
+        "name": "上海",
+        "content": "上海靠近江苏省。"
+      }
+    ]
+  </script>
+
+  <script src='./utils.js'></script>
+  <script src="./index.js"></script>
+  <script>
+    new Tab(document.querySelector('.container'), {}).init();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+.container {
+  width: 500px;
+  margin: 20px auto;
+  border: 1px solid black;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+}
+
+.nav .nav-item {
+  flex: 1;
+  text-align: center;
+  cursor: pointer;
+}
+
+.nav .nav-item.current {
+  background-color: yellow;
+}
