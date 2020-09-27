@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>手写Promise</title>
+</head>
+
+<body>
+  <script src='./index.js'></script>
+  <script>
+    // const promise = new MyPromise((resolve, reject) => {
+    //   Math.random() < 0.5 ? resolve(1) : reject(-1);
+    // }).then(
+    //   res => console.log(res),
+    //   err => console.log(err),
+    // );
+
+    // const promise = new MyPromise((resolve, reject) => {
+    //   setTimeout(() => resolve(1), 1000);
+    // }).then(
+    //   res => console.log(res),
+    // );
+
+    // const promise = new MyPromise((resolve, reject) => {
+    //   setTimeout(() => resolve(1), 1000);
+    // }).then(
+    //   res => {
+    //     console.log('then1',res);
+    //     return res;
+    //   },
+    // ).then(res=>{
+    //   console.log('then2',res);
+    //   return new MyPromise((resolve,reject)=>{
+    //     resolve(res+1);
+    //   });
+    // }).then(res=>console.log('then3',res));
+
+    // const promise = MyPromise.all([1, 2, 3]).then(res => console.log(res));
+
+    // const promise = MyPromise.race([1, 2, 3]).then(res => console.log(res));
+  </script>
+</body>
+
+</html>
